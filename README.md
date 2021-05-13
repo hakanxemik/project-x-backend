@@ -10,4 +10,7 @@ Laravel Backend API for the project
 1. Start MAMP and the needed servers (MySQL and Apache)
 2. `php artisan serve`
 
+# Staging Backend
+https://socialup-api.herokuapp.com/
 
+Heroku Deployment - Credentials not necessary
