@@ -15,6 +15,7 @@ return [
     |
     */
 
+    // Allows URL Paths of this
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
