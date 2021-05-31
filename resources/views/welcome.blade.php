@@ -128,5 +128,10 @@
                 </div>
             </div>
         </div>
+
+    <script>
+        var csrf_token = '<?php echo csrf_token(); ?>';
+        alert(csrf_token)
+    </script>
     </body>
 </html>
