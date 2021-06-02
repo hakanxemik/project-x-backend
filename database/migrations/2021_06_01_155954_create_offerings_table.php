@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHappeningTable extends Migration
+class CreateOfferingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateHappeningTable extends Migration
      */
     public function up()
     {
-        Schema::create('happenings', function (Blueprint $table) {
+        Schema::create('offerings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->timestamp('date');
-            $table->bigInteger('max_guests');
-            $table->bigInteger('price')->nullable();
-            $table->timestamps();
+            $table->enum('type', [
+                'alcohol', 'non-alcohol', 'vegan', 'meals',
+                'snacks', 'grill', 'cocktails', 'fingerfoods',
+                'veggie', 'exotic', 'helal'
+            ]);
         });
     }
 
@@ -30,6 +30,6 @@ class CreateHappeningTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('happening');
+        Schema::dropIfExists('offerings');
     }
 }

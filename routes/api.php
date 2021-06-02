@@ -25,7 +25,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::post('/happening', [HappeningController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/happenings', [HappeningController::class, 'store']);
 Route::get('/happenings', [HappeningController::class, 'getAll']);
 
 
