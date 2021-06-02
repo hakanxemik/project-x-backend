@@ -16,11 +16,12 @@ class CreateHappeningTypesTable extends Migration
         Schema::create('happening_types', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->bigInteger('happening_id')->unsigned();
+            $table->timestamps();
 
             $table->foreign('happening_id')
                 ->references('id')
-                ->on('happenings')
-                ->onDelete('set null');
+                ->on('happenings');
         });
     }
 

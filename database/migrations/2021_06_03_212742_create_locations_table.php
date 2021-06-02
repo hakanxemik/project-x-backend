@@ -16,14 +16,14 @@ class CreateLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('geolocation')->nullable();
-            $table->string('meeting_point')->nullable();
+            $table->string('meetingPoint')->nullable();
             $table->string('description')->nullable();
-            $table->integer('happening_id')->unsigned();
+            $table->bigInteger('happening_id')->unsigned();
+            $table->timestamps();
 
             $table->foreign('happening_id')
                 ->references('id')
-                ->on('happenings')
-                ->onDelete('set null');
+                ->on('happenings');
         });
     }
 

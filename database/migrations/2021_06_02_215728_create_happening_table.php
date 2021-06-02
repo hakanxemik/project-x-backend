@@ -18,8 +18,9 @@ class CreateHappeningTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->dateTime('datetime');
-            $table->bigInteger('max_guests');
+            $table->bigInteger('maxGuests');
             $table->bigInteger('price');
+            $table->timestamps();
         });
     }
 

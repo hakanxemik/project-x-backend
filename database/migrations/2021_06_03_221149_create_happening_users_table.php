@@ -13,14 +13,15 @@ class CreateHappeningUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('happening_users', function (Blueprint $table) {
+        Schema::create('happening_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('happening_id');
-            $table->string('user_type');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('happening_id')->unsigned();
+            $table->string('userType');
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('happening_id')->references('id')->on('happening');
+            $table->foreign('happening_id')->references('id')->on('happenings');
         });
     }
 

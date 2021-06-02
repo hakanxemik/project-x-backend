@@ -9,6 +9,17 @@ class Happening extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'datetime',
+        'max_guests',
+        'price'
+    ];
+
     public function users() {
         return $this->belongsToMany('App\Models\User')->withPivot('user_type');
     }

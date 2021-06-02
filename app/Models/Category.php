@@ -12,6 +12,14 @@ class Category extends Model
     use HasFactory;
 
     /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'color'
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

@@ -11,6 +11,13 @@ class HappeningType extends Model
     use HasFactory;
 
     /**
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

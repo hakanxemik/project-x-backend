@@ -9,6 +9,15 @@ class Location extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'geolocation',
+        'meeting_point',
+        'description'
+    ];
+
     public function happenings() {
         return $this->belongsToMany('App\Models\Happening');
     }
