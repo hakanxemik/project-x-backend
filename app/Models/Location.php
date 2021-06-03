@@ -19,6 +19,6 @@ class Location extends Model
     ];
 
     public function happenings() {
-        return $this->belongsToMany('App\Models\Happening');
+        return $this->hasMany('App\Models\Happening');
     }
 }

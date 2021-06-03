@@ -21,7 +21,7 @@ class Happening extends Model
     ];
 
     public function users() {
-        return $this->belongsToMany('App\Models\User')->withPivot('user_type');
+        return $this->belongsToMany('App\Models\User')->withPivot('userType');
     }
 
     public function offerings() {

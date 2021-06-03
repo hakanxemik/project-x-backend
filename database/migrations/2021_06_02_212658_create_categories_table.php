@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHappeningTypesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateHappeningTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('happening_types', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->bigInteger('happening_id')->unsigned();
+            $table->string('name');
+            $table->string('color');
             $table->timestamps();
-
-            $table->foreign('happening_id')
-                ->references('id')
-                ->on('happenings');
         });
     }
 
@@ -32,6 +28,6 @@ class CreateHappeningTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('happening_types');
+        Schema::dropIfExists('categories');
     }
 }

@@ -20,7 +20,23 @@ class CreateHappeningTable extends Migration
             $table->dateTime('datetime');
             $table->bigInteger('maxGuests');
             $table->bigInteger('price');
+            $table->bigInteger('location_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('type_id')->unsigned();
             $table->timestamps();
+
+
+            $table->foreign('location_id')
+                ->references('id')
+                ->on('locations');
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories');
+
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('happening_types');
         });
     }
 

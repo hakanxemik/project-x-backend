@@ -40,7 +40,7 @@ Route::get('/create', function (Request $request) {
 
 
     $category = new Category();
-    $category->title = CategoryTypes::PARTY();
+    $category->name = CategoryTypes::PARTY();
     $category->color = CategoryColors::RED();
 
 
@@ -50,8 +50,6 @@ Route::get('/create', function (Request $request) {
     $offering2 = new Offering();
     $offering2->name = OfferingTypes::MEALS();
 
-    $offering->save();
-    $offering2->save();
 
     $happeningtype = new HappeningType();
     $happeningtype->type = HappeningTypes::INDOOR();
@@ -64,15 +62,23 @@ Route::get('/create', function (Request $request) {
     $happening->maxGuests = 22;
     $happening->description = 'asdfasdf';
 
-    $happening->users()->sync(User::latest()->first(), ['user_type' => UserTypes::HOST()]);
-    $happening->offerings()->sync($offering);
-    $happening->offerings()->sync($offering2);
-    $happening->category()->associate($category);
-    $happening->location()->associate($location);
+    $user = User::latest()->first();
 
     $location->save();
     $category->save();
     $happeningtype->save();
 
+    $happening->location()->associate($location);
+    $happening->category()->associate($category);
+    $happening->type()->associate($happeningtype);
     $happening->save();
+
+    $offering->save();
+    $happening->offerings()->sync($offering);
+
+    $offering2->save();
+    $happening->offerings()->sync($offering2);
+
+    $user = User::latest()->first();
+    $happening->users()->sync([$user->id, 'userType' => 'host'], false);
 });

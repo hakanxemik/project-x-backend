@@ -32,6 +32,6 @@ class CreateHappeningUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('happening_users');
+        Schema::dropIfExists('happening_user');
     }
 }

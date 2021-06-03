@@ -18,12 +18,7 @@ class CreateLocationsTable extends Migration
             $table->string('geolocation')->nullable();
             $table->string('meetingPoint')->nullable();
             $table->string('description')->nullable();
-            $table->bigInteger('happening_id')->unsigned();
             $table->timestamps();
-
-            $table->foreign('happening_id')
-                ->references('id')
-                ->on('happenings');
         });
     }
 

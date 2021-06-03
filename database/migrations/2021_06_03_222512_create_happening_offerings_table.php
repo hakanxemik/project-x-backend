@@ -13,7 +13,7 @@ class CreateHappeningOfferingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('happening_offerings', function (Blueprint $table) {
+        Schema::create('happening_offering', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('happening_id')->unsigned();
             $table->bigInteger('offering_id')->unsigned();
@@ -31,6 +31,6 @@ class CreateHappeningOfferingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('happening_offerings');
+        Schema::dropIfExists('happening_offering');
     }
 }
