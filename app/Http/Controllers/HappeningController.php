@@ -66,7 +66,7 @@ class HappeningController extends Controller
 
         $happening->users()->sync([$user->id => ['userType' => 'host']], false);
 
-        return new Response(['message' => 'Happening created!'], 200);
+        return new Response('Happening created', 200);
     }
 
     public function getColor($category) {
