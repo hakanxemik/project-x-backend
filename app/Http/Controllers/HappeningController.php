@@ -16,7 +16,7 @@ class HappeningController extends Controller
 {
 
     public function store(Request $request) {
-        $user = $request->user();
+        $user = auth()->user();
 
         $happening = new Happening();
         $happening = Happening::make([
