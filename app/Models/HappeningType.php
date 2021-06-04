@@ -14,7 +14,7 @@ class HappeningType extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'type'
     ];
 
     /**

@@ -16,12 +16,12 @@ class Happening extends Model
         'title',
         'description',
         'datetime',
-        'max_guests',
+        'maxGuests',
         'price'
     ];
 
     public function users() {
-        return $this->belongsToMany('App\Models\User')->withPivot('userType');
+        return $this->belongsToMany('App\Models\User')->as('attendance')->withPivot('userType');
     }
 
     public function offerings() {

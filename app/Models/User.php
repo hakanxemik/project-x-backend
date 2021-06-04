@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function happenings() {
-        return $this->belongsToMany('App\Models\Happening')->withPivot('user_type');
+        return $this->belongsToMany('App\Models\Happening')->as('attendance')->withPivot('user_type');
     }
 }

@@ -17,7 +17,7 @@ class CreateHappeningUsersTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('happening_id')->unsigned();
-            $table->string('userType');
+            $table->string('userType')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

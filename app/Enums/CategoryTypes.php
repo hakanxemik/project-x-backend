@@ -14,9 +14,9 @@ use BenSampo\Enum\Enum;
 
 final class CategoryTypes extends Enum
 {
-    const PARTY = 'party';
-    const KULINARIK = 'kulinarik';
-    const GAMES = 'games';
-    const SPORT = 'sport';
+    const PARTY = 'Party';
+    const KULINARIK = 'Kulinarik';
+    const GAMES = 'Games';
+    const SPORT = 'Sport';
 }
 

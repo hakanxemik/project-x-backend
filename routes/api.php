@@ -6,6 +6,7 @@ use App\Enums\HappeningTypes;
 use App\Enums\OfferingTypes;
 use App\Enums\UserTypes;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HappeningController;
 use App\Models\Category;
 use App\Models\Happening;
 use App\Models\HappeningType;
@@ -32,6 +33,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/happenings', [HappeningController::class, 'store']);
 
 Route::get('/create', function (Request $request) {
     $location = new Location();
@@ -80,5 +82,6 @@ Route::get('/create', function (Request $request) {
     $happening->offerings()->sync($offering2);
 
     $user = User::latest()->first();
-    $happening->users()->sync([$user->id, 'userType' => 'host'], false);
+
+    return Happening::with(['location', 'category', 'type', 'users'])->get();
 });
