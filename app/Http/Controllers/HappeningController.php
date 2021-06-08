@@ -9,6 +9,7 @@ use App\Models\Happening;
 use App\Models\HappeningType;
 use App\Models\Location;
 use App\Models\Offering;
+use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
@@ -16,15 +17,16 @@ class HappeningController extends Controller
 {
 
     public function store(Request $request) {
-        $user = auth()->user();
+        $user =  User::select()->first();
 
-        $happening = new Happening();
+        // Happening ohne Title funktioniert! Error
         $happening = Happening::make([
             'title' => $request->input('title'),
             'datetime' => $request->input('date'),
             'price' => $request->input('price'),
             'maxGuests' => $request->input('maxGuests'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'offeringsDescription' => $request->input('offeringsDescription')
         ]);
 
         if ($request->input('location.meetingPoint') && $request->input('location.description')) {
