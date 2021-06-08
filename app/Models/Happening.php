@@ -15,6 +15,7 @@ class Happening extends Model
     protected $fillable = [
         'title',
         'description',
+        'offeringsDescription',
         'datetime',
         'maxGuests',
         'price'

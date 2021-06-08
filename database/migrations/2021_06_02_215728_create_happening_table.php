@@ -17,9 +17,10 @@ class CreateHappeningTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
+            $table->string('offeringsDescription')->nullable();
             $table->dateTime('datetime');
             $table->bigInteger('maxGuests');
-            $table->bigInteger('price');
+            $table->bigInteger('price')->nullable();
             $table->bigInteger('location_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('type_id')->unsigned();
