@@ -19,7 +19,10 @@ class HappeningController extends Controller
     public function store(Request $request) {
         $user =  User::select()->first();
 
-        // Happening ohne Title funktioniert! Error
+        // TODO-DO Happening ohne Title funktioniert! Error
+        // TODO-DO Transaction and Commits -> Eloquent
+
+
         $happening = Happening::make([
             'title' => $request->input('title'),
             'datetime' => $request->input('date'),
@@ -28,6 +31,8 @@ class HappeningController extends Controller
             'description' => $request->input('description'),
             'offeringsDescription' => $request->input('offeringsDescription')
         ]);
+
+        // To-Do Mit Throw Exception testen ob commit funktioniert
 
         if ($request->input('location.meetingPoint') && $request->input('location.description')) {
             $dataLocation = [
@@ -84,5 +89,13 @@ class HappeningController extends Controller
             default:
                 return CategoryColors::MAGENTA();
         }
+    }
+
+    public function getAll(Request $request) {
+        $happenings = Happening::with('location', 'category', 'users', 'type', 'offerings')->get();
+
+        // TODO Daten die ich nicht brauch raushauen
+        // TODO Pagination -> im FE brauche ich nur Teile vom Happening
+        return new Response($happenings, 200);
     }
 }
