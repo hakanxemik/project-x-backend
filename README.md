@@ -2,6 +2,9 @@
 Laravel Backend API for the project
 
 # How to setup the project
+
+First you need to install composer on your computer. Composer is a package manager just like npm (google it for installation instructions)
+
 1. `cp .env.example` .env (Change credentials if needed)
 2. `composer install`
 3. `php artisan key:generate`
