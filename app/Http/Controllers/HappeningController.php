@@ -32,7 +32,7 @@ class HappeningController extends Controller
             'offeringsDescription' => $request->input('offeringsDescription')
         ]);
 
-        // To-Do Mit Throw Exception testen ob commit funktioniert
+        // TODO Mit Throw Exception testen ob commit funktioniert
 
         if ($request->input('location.meetingPoint') && $request->input('location.description')) {
             $dataLocation = [
