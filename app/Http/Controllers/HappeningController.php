@@ -17,7 +17,11 @@ class HappeningController extends Controller
 {
 
     public function store(Request $request) {
-        $user =  User::select()->first();
+        $user =  auth()->user();
+
+        if (!$user) {
+            return new Response('User not found!', 400);
+        }
 
         // TODO-DO Happening ohne Title funktioniert! Error
         // TODO-DO Transaction and Commits -> Eloquent

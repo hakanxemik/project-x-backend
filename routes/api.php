@@ -34,7 +34,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/happenings', [HappeningController::class, 'store']); //->middleware('auth:sanctum');
+Route::post('/happenings', [HappeningController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/happenings', [HappeningController::class, 'getAll']); //->middleware('auth:sanctum');
 Route::get('/categories', [CategoryController::class, 'getAllCategories']); // ->middleware('auth:sanctum');
 Route::get('/offerings', [CategoryController::class, 'getAllOfferings']); // ->middleware('auth:sanctum');

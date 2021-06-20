@@ -29,8 +29,6 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        dd($response);
-
         return response($response, 201);
     }
 
