@@ -96,10 +96,35 @@ class HappeningController extends Controller
     }
 
     public function getAll(Request $request) {
-        $happenings = Happening::with('location', 'category', 'users', 'type', 'offerings')->get();
+        $happenings = Happening::with('location', 'category', 'users', 'type', 'offerings')
+                ->whereHas('users', function($q) {
+                    $q->where('user_id', '!=', auth()->user()->id)->where('userType', '=', 'guest');
+                })
+                ->get();
 
         // TODO Daten die ich nicht brauch raushauen
         // TODO Pagination -> im FE brauche ich nur Teile vom Happening
         return new Response($happenings, 200);
+    }
+
+    public function getMyHappenings(Request $request) {
+        $happenings = Happening::with('location', 'category', 'users', 'type', 'offerings')
+            ->whereHas('users', function($q) {
+                $q->where('user_id', '=', auth()->user()->id)->where('userType', '=', 'host');
+            })
+            ->get();
+
+        // TODO Daten die ich nicht brauch raushauen
+        // TODO Pagination -> im FE brauche ich nur Teile vom Happening
+        return new Response($happenings, 200);
+    }
+
+    public function join($id) {
+        $user =  auth()->user();
+        $happening = Happening::findOrFail($id);
+
+        $happening->users()->sync([$user->id => ['userType' => 'guest']], false);
+
+        return new Response('Joined!', 200);
     }
 }
