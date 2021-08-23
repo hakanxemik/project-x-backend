@@ -6,7 +6,7 @@ use App\Enums\CategoryColors;
 use App\Enums\CategoryTypes;
 use App\Models\Category;
 use App\Models\Happening;
-use App\Models\HappeningType;
+use App\Models\Type;
 use App\Models\Location;
 use App\Models\Offering;
 use App\Models\User;
@@ -43,7 +43,7 @@ class HappeningController extends Controller
             'description' => $request->input('location.description')
         ];
 
-        $location = Location::create([$dataLocation]);
+        $location = Location::create($dataLocation);
 
         $happening->location()->associate($location);
 
@@ -54,13 +54,11 @@ class HappeningController extends Controller
 
         $happening->category()->associate($category);
 
-        $happeningType = HappeningType::create([
-            'type' => strtolower($request->input('type'))
-        ]);
-
-        $happening->type()->associate($happeningType);
-
         $happening->save();
+
+        $happeningType = $request->input('type');
+
+        $happening->type()->attach($happeningType);
 
         $happening->offerings()->attach($request->input('offerings'));
 
@@ -71,16 +69,12 @@ class HappeningController extends Controller
 
     public function getColor($category) {
         switch($category) {
-            case CategoryTypes::PARTY():
-                return CategoryColors::RED();
-            case CategoryTypes::SPORT();
-                return CategoryColors::BLUE();
-            case CategoryTypes::GAMES();
-                return CategoryColors::YELLOW();
-            case CategoryTypes::KULINARIK():
-                return CategoryColors::GREEN();
+            case 'party':
+                return 'red';
+            case 'grill';
+                return 'blue';
             default:
-                return CategoryColors::MAGENTA();
+                return 'purple';
         }
     }
 

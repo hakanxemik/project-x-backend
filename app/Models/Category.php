@@ -19,16 +19,6 @@ class Category extends Model
         'color'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'title' => CategoryTypes::class,
-        'color' => CategoryColors::class
-    ];
-
     public function happenings() {
         return $this->hasMany('App\Models\Happening');
     }

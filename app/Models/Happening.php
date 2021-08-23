@@ -34,7 +34,7 @@ class Happening extends Model
     }
 
     public function type() {
-        return $this->belongsTo('App\Models\HappeningType');
+        return $this->belongsToMany('App\Models\Type');
     }
 
     public function location() {

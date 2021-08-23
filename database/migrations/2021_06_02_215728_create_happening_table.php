@@ -23,7 +23,6 @@ class CreateHappeningTable extends Migration
             $table->bigInteger('price')->nullable();
             $table->bigInteger('location_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('type_id')->unsigned();
             $table->timestamps();
 
 
@@ -34,10 +33,6 @@ class CreateHappeningTable extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories');
-
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('happening_types');
         });
     }
 
