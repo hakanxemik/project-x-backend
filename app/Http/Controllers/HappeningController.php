@@ -50,30 +50,24 @@ class HappeningController extends Controller
         }
 
         $location = Location::create([$dataLocation]);
-        $happening->location()->associate($location);
+        $happening->location()->save($location);
 
         $category = Category::create([
             'name' => $request->input('category'),
             'color' => $this->getColor($request->input('category'))
         ]);
 
-        $happening->category()->associate($category);
+        $happening->category()->save($category);
 
         $happeningType = HappeningType::create([
             'type' => strtolower($request->input('type'))
         ]);
 
-        $happening->type()->associate($happeningType);
+        $happening->type()->save($happeningType);
 
         $happening->save();
 
-        foreach($request->input('offerings') as $offering) {
-            $offering = Offering::create([
-                'name' => strtolower($offering)
-            ]);
-
-            $happening->offerings()->sync($offering);
-        }
+        $happening->offerings()->attach($request->input('offerings'));
 
         $happening->users()->sync([$user->id => ['userType' => 'host']], false);
 
