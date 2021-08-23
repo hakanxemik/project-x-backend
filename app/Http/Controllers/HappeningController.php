@@ -38,32 +38,27 @@ class HappeningController extends Controller
 
         // TODO Mit Throw Exception testen ob commit funktioniert
 
-        if ($request->input('location.meetingPoint') && $request->input('location.description')) {
-            $dataLocation = [
-                'meetingPoint' => $request->input('location.meetingPoint'),
-                'description' => $request->input('location.description')
-            ];
-        } else {
-            $dataLocation = [
-                'geolocation' => $request->input('location.geolocation')
-            ];
-        }
+        $dataLocation = [
+            'meetingPoint' => $request->input('location.meetingPoint'),
+            'description' => $request->input('location.description')
+        ];
 
         $location = Location::create([$dataLocation]);
-        $happening->location()->save($location);
+
+        $happening->location()->associate($location);
 
         $category = Category::create([
             'name' => $request->input('category'),
             'color' => $this->getColor($request->input('category'))
         ]);
 
-        $happening->category()->save($category);
+        $happening->category()->associate($category);
 
         $happeningType = HappeningType::create([
             'type' => strtolower($request->input('type'))
         ]);
 
-        $happening->type()->save($happeningType);
+        $happening->type()->associate($happeningType);
 
         $happening->save();
 
