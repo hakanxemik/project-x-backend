@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\CategoryTypes;
 use App\Enums\HappeningTypes;
+use App\Enums\InterestTypes;
 use App\Enums\OfferingTypes;
 use App\Models\Category;
+use App\Models\Interest;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,12 @@ class CategoryController extends Controller
         return new Response(HappeningTypes::getValues(), 200);
     }
 
-    public function getAllOfferings(Request $request) {
+    public function getAllOfferings(Request $request)
+    {
         return new Response(OfferingTypes::getValues(), 200);
+    }
+
+    public function getAllInterests(Request $request) {
+        return new Response(Interest::all(), 200);
     }
 }

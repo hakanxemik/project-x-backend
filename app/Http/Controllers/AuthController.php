@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Interest;
+use App\Models\Offering;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +23,8 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
+
+        $user->interests()->attach($request->input('interests'));
 
         $token = $user->createToken('happeningtoken')->plainTextToken;
 

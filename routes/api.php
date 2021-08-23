@@ -33,7 +33,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/happenings', [HappeningController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/happenings', [HappeningController::class, 'getAll'])->middleware('auth:sanctum');
 Route::get('/happenings/host', [HappeningController::class, 'getMyHappenings'])->middleware('auth:sanctum');
@@ -41,4 +42,5 @@ Route::get('/happenings/{id}/join', [HappeningController::class, 'join'])->middl
 Route::get('/categories', [CategoryController::class, 'getAllCategories']); // ->middleware('auth:sanctum');
 Route::get('/offerings', [CategoryController::class, 'getAllOfferings']); // ->middleware('auth:sanctum');
 Route::get('/types', [CategoryController::class, 'getAllTypes']); // ->middleware('auth:sanctum');
+Route::get('/interests', [CategoryController::class, 'getAllInterests']); // ->middleware('auth:sanctum');
 
