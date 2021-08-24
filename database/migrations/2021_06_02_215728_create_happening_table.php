@@ -22,17 +22,12 @@ class CreateHappeningTable extends Migration
             $table->bigInteger('maxGuests');
             $table->bigInteger('price')->nullable();
             $table->bigInteger('location_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
 
 
             $table->foreign('location_id')
                 ->references('id')
                 ->on('locations');
-
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories');
         });
     }
 

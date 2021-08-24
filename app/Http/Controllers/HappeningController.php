@@ -47,18 +47,13 @@ class HappeningController extends Controller
 
         $happening->location()->associate($location);
 
-        $category = Category::create([
-            'name' => $request->input('category'),
-            'color' => $this->getColor($request->input('category'))
-        ]);
-
-        $happening->category()->associate($category);
-
         $happening->save();
 
         $happeningType = $request->input('type');
 
         $happening->type()->attach($happeningType);
+
+        $happening->category()->attach($request->input('category'));
 
         $happening->offerings()->attach($request->input('offerings'));
 

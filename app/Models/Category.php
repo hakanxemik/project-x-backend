@@ -20,6 +20,6 @@ class Category extends Model
     ];
 
     public function happenings() {
-        return $this->hasMany('App\Models\Happening');
+        return $this->belongsToMany('App\Models\Happening');
     }
 }
