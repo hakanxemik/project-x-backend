@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\CategoryTypes;
-use App\Enums\HappeningTypes;
-use App\Enums\InterestTypes;
-use App\Enums\OfferingTypes;
 use App\Models\Category;
 use App\Models\Type;
 use App\Models\Interest;
