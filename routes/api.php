@@ -8,6 +8,7 @@ use App\Enums\UserTypes;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HappeningController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\Happening;
 use App\Models\HappeningType;
@@ -39,6 +40,8 @@ Route::get('/happenings', [HappeningController::class, 'getAll'])->middleware('a
 Route::get('/happenings/host', [HappeningController::class, 'getMyHappenings'])->middleware('auth:sanctum');
 Route::get('/happenings/guest', [HappeningController::class, 'getAppliedHappenings'])->middleware('auth:sanctum');
 Route::get('/happenings/{id}/join', [HappeningController::class, 'join'])->middleware('auth:sanctum');
+Route::post('/user/profile/upload', [UserController::class, 'upload_user_photo'])->middleware('auth:sanctum');
+Route::get('/user/profile', [UserController::class, 'getUser'])->middleware('auth:sanctum');
 Route::get('/categories', [CategoryController::class, 'getAllCategories']); // ->middleware('auth:sanctum');
 Route::get('/offerings', [CategoryController::class, 'getAllOfferings']); // ->middleware('auth:sanctum');
 Route::get('/types', [CategoryController::class, 'getAllTypes']); // ->middleware('auth:sanctum');
