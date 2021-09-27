@@ -14,22 +14,21 @@ class UserController extends Controller
 {
     public function upload_user_photo(Request $request) {
 
-        $request->validate([
-            'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,pdf|max:2048'
-        ]);
+        list($mime, $data)   = explode(';', $request->file);
+        list(, $data)       = explode(',', $data);
+        $data = base64_decode($data);
+
+        $mime = explode(':',$mime)[1];
+        $ext = explode('/',$mime)[1];
+        $name = mt_rand().time();
+        $savePath = '/img/user/'.$name.'.'.$ext;
+
+        file_put_contents(public_path().'/'.$savePath, $data);
 
 
-        // Handle the user upload of avatar
-        if($request->hasFile('file')){
-            $image = $request->file('file');
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('img/user/' . $filename);
-            Image::make($image->getRealPath())->save($path);
-
-            $user = Auth::user();
-            $user->avatar = $path;
-            $user->save();
-        }
+        $user = Auth::user();
+        $user->avatar = $savePath;
+        $user->save();
 
         return new Response('Image uploaded amg', 200);
 
@@ -38,15 +37,11 @@ class UserController extends Controller
     public function getUser() {
         $user =  auth()->user();
 
-        $type = pathinfo($user->avatar, PATHINFO_EXTENSION);
-        $data = file_get_contents($user->avatar);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-
         $userData = [
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
             'interests' => $user->interests,
-            'avatar' => $base64
+            'avatar' => $user->avatar
         ];
 
         return new Response($userData, 200);
