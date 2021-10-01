@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Interest;
+use App\Models\Offering;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -11,16 +13,24 @@ class AuthController extends Controller
 {
     public function register(Request $request) {
         $fields = $request->validate([
-            'name' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'gender' => 'required|string',
+            'birthdate' => 'required|date',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed'
         ]);
 
         $user = User::create([
-            'name' => $fields['name'],
+            'firstname' => $fields['firstname'],
+            'lastname' => $fields['lastname'],
+            'gender' => $fields['gender'],
+            'birthdate' => $fields['birthdate'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
+
+        $user->interests()->attach($request->input('interests'));
 
         $token = $user->createToken('happeningtoken')->plainTextToken;
 

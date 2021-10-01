@@ -4,18 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHappeningTypesTable extends Migration
+class CreateInterestsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
+
+     *
      */
     public function up()
     {
-        Schema::create('happening_types', function (Blueprint $table) {
+        Schema::create('interests', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateHappeningTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('happening_types');
+        Schema::dropIfExists('interests');
     }
 }

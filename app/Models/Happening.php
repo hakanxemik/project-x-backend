@@ -30,11 +30,11 @@ class Happening extends Model
     }
 
     public function category() {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsToMany('App\Models\Category');
     }
 
     public function type() {
-        return $this->belongsTo('App\Models\HappeningType');
+        return $this->belongsToMany('App\Models\Type');
     }
 
     public function location() {

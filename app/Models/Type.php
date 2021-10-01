@@ -6,7 +6,7 @@ use App\Enums\HappeningTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HappeningType extends Model
+class Type extends Model
 {
     use HasFactory;
 
@@ -14,19 +14,10 @@ class HappeningType extends Model
      * @var array
      */
     protected $fillable = [
-        'type'
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => HappeningTypes::class
+        'name'
     ];
 
     public function happenings() {
-        return $this->hasMany('App\Models\Happening');
+        return $this->belongsToMany('App\Models\Happening');
     }
 }

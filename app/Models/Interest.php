@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\InterestTypes;
 use App\Enums\OfferingTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Offering extends Model
+class Interest extends Model
 {
     use HasFactory;
 
@@ -17,7 +18,7 @@ class Offering extends Model
         'name'
     ];
 
-    public function happenings() {
-        return $this->belongsToMany('App\Models\Happening');
+    public function users() {
+        return $this->belongsToMany('App\Models\User');
     }
 }
