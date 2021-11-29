@@ -36,11 +36,15 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/happenings', [HappeningController::class, 'store'])->middleware('auth:sanctum');
+
 Route::get('/happenings', [HappeningController::class, 'getAll'])->middleware('auth:sanctum');
 Route::get('/happenings/host', [HappeningController::class, 'getMyHappenings'])->middleware('auth:sanctum');
 Route::get('/happenings/guest', [HappeningController::class, 'getAppliedHappenings'])->middleware('auth:sanctum');
 Route::get('/happenings/{id}/join', [HappeningController::class, 'join'])->middleware('auth:sanctum');
+
 Route::post('/user/profile/upload', [UserController::class, 'upload_user_photo'])->middleware('auth:sanctum');
+Route::put('/user/profile/bio', [UserController::class, 'updateBio'])->middleware('auth:sanctum');
+
 Route::get('/user/profile', [UserController::class, 'getUser'])->middleware('auth:sanctum');
 Route::get('/categories', [CategoryController::class, 'getAllCategories']); // ->middleware('auth:sanctum');
 Route::get('/offerings', [CategoryController::class, 'getAllOfferings']); // ->middleware('auth:sanctum');

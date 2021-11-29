@@ -25,12 +25,11 @@ class UserController extends Controller
 
         file_put_contents(public_path().'/'.$savePath, $data);
 
-
         $user = Auth::user();
         $user->avatar = $savePath;
         $user->save();
 
-        return new Response('Image uploaded amg', 200);
+        return new Response('Image uploaded', 200);
 
     }
 
@@ -41,9 +40,16 @@ class UserController extends Controller
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
             'interests' => $user->interests,
-            'avatar' => $user->avatar
+            'avatar' => $user->avatar,
+            'bio' => $user->bio
         ];
 
         return new Response($userData, 200);
+    }
+
+    public function updateBio(Request $request) {
+        $user =  auth()->user();
+        $user->bio = $request->bio;
+        $user->save();
     }
 }

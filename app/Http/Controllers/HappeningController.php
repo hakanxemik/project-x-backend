@@ -62,6 +62,7 @@ class HappeningController extends Controller
         return new Response('Happening created', 200);
     }
 
+    // TO-DO DEAD CODE
     public function getColor($category) {
         switch($category) {
             case 'party':
@@ -85,7 +86,10 @@ class HappeningController extends Controller
     public function getMyHappenings(Request $request) {
         $happenings = Happening::with('location', 'category', 'users', 'type', 'offerings')
             ->whereHas('users', function($q) {
-                $q->where('user_id', '=', auth()->user()->id)->where('userType', '=', 'host');
+                $q->where('user_id', '=', auth()->user()->id)->where('userType', '=', 'host')->whereHas('interest_user', function($qa) {
+                    $qa->where('user_id', '=', $q->id);
+                });
+
             })
             ->get();
 
