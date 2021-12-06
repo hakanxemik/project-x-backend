@@ -41,6 +41,7 @@ class UserController extends Controller
             'lastname' => $user->lastname,
             'interests' => $user->interests,
             'avatar' => $user->avatar,
+            'birthdate' => $user->birthdate,
             'bio' => $user->bio
         ];
 
