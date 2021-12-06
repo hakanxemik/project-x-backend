@@ -42,8 +42,8 @@ Route::get('/happenings/host', [HappeningController::class, 'getMyHappenings'])-
 Route::get('/happenings/guest', [HappeningController::class, 'getAppliedHappenings'])->middleware('auth:sanctum');
 Route::get('/happenings/{id}/join', [HappeningController::class, 'join'])->middleware('auth:sanctum');
 
-Route::post('/user/profile/upload', [UserController::class, 'upload_user_photo'])->middleware('auth:sanctum');
-Route::put('/user/profile/edit', [UserController::class, 'updateProfile'])->middleware('auth:sanctum');
+Route::put('/user/profile/upload', [UserController::class, 'upload_user_photo'])->middleware('auth:sanctum');
+Route::put('/user/edit', [UserController::class, 'updateProfile'])->middleware('auth:sanctum');
 
 Route::get('/user/profile', [UserController::class, 'getUser'])->middleware('auth:sanctum');
 Route::get('/categories', [CategoryController::class, 'getAllCategories']); // ->middleware('auth:sanctum');

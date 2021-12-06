@@ -86,9 +86,7 @@ class HappeningController extends Controller
     public function getMyHappenings(Request $request) {
         $happenings = Happening::with('location', 'category', 'users', 'type', 'offerings')
             ->whereHas('users', function($q) {
-                $q->where('user_id', '=', auth()->user()->id)->where('userType', '=', 'host')->whereHas('interest_user', function($qa) {
-                    $qa->where('user_id', '=', $q->id);
-                });
+                $q->where('user_id', '=', auth()->user()->id)->where('userType', '=', 'host');
 
             })
             ->get();
@@ -116,8 +114,6 @@ class HappeningController extends Controller
         $happening = Happening::findOrFail($id);
 
         $happening->users()->sync([$user->id => ['userType' => 'guest']], false);
-
-        $happening->users()->firstname;
 
         return new Response('Joined!', 200);
     }

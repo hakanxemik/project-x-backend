@@ -53,5 +53,7 @@ class UserController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->save();
+
+        return new Response('Profile updated', 200);
     }
 }
