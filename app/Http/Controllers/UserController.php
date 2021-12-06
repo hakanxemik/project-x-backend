@@ -47,9 +47,11 @@ class UserController extends Controller
         return new Response($userData, 200);
     }
 
-    public function updateBio(Request $request) {
+    public function updateProfile(Request $request) {
         $user =  auth()->user();
         $user->bio = $request->bio;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
         $user->save();
     }
 }

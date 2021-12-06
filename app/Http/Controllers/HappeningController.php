@@ -93,6 +93,7 @@ class HappeningController extends Controller
             })
             ->get();
 
+            // TODO - Funktion auslagern
         // TODO Daten die ich nicht brauch raushauen
         // TODO Pagination -> im FE brauche ich nur Teile vom Happening
         return new Response($happenings, 200);
@@ -115,6 +116,8 @@ class HappeningController extends Controller
         $happening = Happening::findOrFail($id);
 
         $happening->users()->sync([$user->id => ['userType' => 'guest']], false);
+
+        $happening->users()->firstname;
 
         return new Response('Joined!', 200);
     }
